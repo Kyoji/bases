@@ -5,6 +5,9 @@ class Block {
         this.multiplier = multiplier;
         this.contains = 0;
     }
+    getPlaceValue() {
+        return this.multiplier * this.contains;
+    }
 }
 exports.default = Block;
 //# sourceMappingURL=block.js.map

@@ -8,6 +8,8 @@ class App {
     constructor() {
         this.baseTo = new Base(16, this.bytes);
         this.baseFrom = new Base(10, this.bytes);
+        this.baseFrom.insert('1234');
+        this.baseTo.convert(this.baseFrom);
     }
 }
 

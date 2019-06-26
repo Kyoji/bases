@@ -6,4 +6,8 @@ export default class Block {
         this.multiplier = multiplier;
         this.contains = 0;
     }
+
+    getPlaceValue() {
+        return this.multiplier * this.contains;
+    }
 }
