@@ -6,10 +6,13 @@ class App {
     baseTo: Base;
 
     constructor() {
+        let test = '87392';
+        let base = 16;
         this.baseTo = new Base(16, this.bytes);
         this.baseFrom = new Base(10, this.bytes);
-        this.baseFrom.insert('87392');
+        this.baseFrom.insert(test);
         this.baseTo.convert(this.baseFrom);
+        console.log(test+' in base '+base+' is:');
         this.baseTo.print();
     }
 }
