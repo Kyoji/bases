@@ -6,6 +6,7 @@ export default class Base {
     blocks: Block[] = [];
     bytes: number;
     places: number = 0;
+    value: string;
 
     constructor(base: number, bytes: number) {
         this.base = base;
@@ -14,6 +15,7 @@ export default class Base {
     }
 
     blocksInit() {
+        this.blocks = [];
         let i = 0;
         for(i; i < this.bytes; i++) {
             let multiplier = Math.pow(this.base, i);
@@ -27,6 +29,7 @@ export default class Base {
             alert("Number too long!");
             return;
         }
+        this.value = number;
         let i = 0
         let offset = number.length - 1;
         for(i; i < number.length; i++) {
@@ -36,26 +39,23 @@ export default class Base {
     }
 
     reset() {
-        this.blocks = [];
+        this.blocksInit();
         this.places = 0;
     }
 
     convert(baseFrom: Base) {
-        let offset = baseFrom.places - 1;
-        // let i = 0;
-        let decValue = 0;
+        this.reset();
+        let offset = this.bytes - 1;
+        let decValue = +baseFrom.value;
         for(offset; offset >= 0; offset--) {
-            decValue += baseFrom.blocks[offset].getPlaceValue();
             while (decValue >= this.blocks[offset].multiplier) {
                 this.blocks[offset].contains++;
                 decValue -= this.blocks[offset].multiplier;
             }
+            this.places++;
         }
-        offset = 0;
-        while( this.blocks[offset].contains >= this.base) {
-            this.blocks[offset].contains -= this.base;
-            offset++;
-            this.blocks[offset].contains++;
+        if( this.blocks[this.places - 1].contains > this.base ) {
+            console.log('Result greater than '+(this.bytes * 4)+'-bit!')
         }
     }
 }
