@@ -52,10 +52,27 @@ export default class Base {
                 this.blocks[offset].contains++;
                 decValue -= this.blocks[offset].multiplier;
             }
-            this.places++;
+            if( this.blocks[offset].contains > 0 && this.places === 0 ) {
+                this.places = offset + 1;
+            }
+                
         }
         if( this.blocks[this.places - 1].contains > this.base ) {
             console.log('Result greater than '+(this.bytes * 4)+'-bit!')
         }
     }
+
+    print() {
+        let i = this.places - 1;
+        let output = '';
+        for(i; i >= 0; i--) {
+            if(this.blocks[i].contains > 9) {
+                output += bmap.get(this.blocks[i].contains);
+            } else {
+                output += this.blocks[i].contains;
+            }
+        }
+        console.log(output);
+    }
+
 }

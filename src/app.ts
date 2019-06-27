@@ -10,6 +10,7 @@ class App {
         this.baseFrom = new Base(10, this.bytes);
         this.baseFrom.insert('87392');
         this.baseTo.convert(this.baseFrom);
+        this.baseTo.print();
     }
 }
 
