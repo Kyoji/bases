@@ -18,3 +18,7 @@ class App {
 }
 
 let app = new App();
+
+let boxes = document.getElementsByClassName("box");
+
+console.log(boxes);
