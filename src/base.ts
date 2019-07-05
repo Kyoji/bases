@@ -6,6 +6,7 @@ export default class Base {
     blocks: Block[] = [];
     bytes: number;
     places: number = 0;
+    zeroes: number = this.bytes;
     value: string;
 
     constructor(base: number, bytes: number) {
@@ -25,17 +26,21 @@ export default class Base {
     }
 
     insert(number: string) {
+        this.places = 0;
+        this.zeroes = 0;
         if( number.length > this.bytes) {
             alert("Number too long!");
             return;
         }
         this.value = number;
+        console.log(this.value);
         let i = 0
         let offset = number.length - 1;
         for(i; i < number.length; i++) {
             this.blocks[i].contains = +number[offset - i];
             this.places++;
         }
+        this.zeroes = this.bytes - this.places;
     }
 
     reset() {
@@ -55,23 +60,22 @@ export default class Base {
             if( this.blocks[offset].contains > 0 && this.places === 0 ) {
                 this.places = offset + 1;
             }
-                
         }
+        this.zeroes = this.bytes - this.places;
         if( this.blocks[this.places - 1].contains > this.base ) {
             console.log('Result greater than '+(this.bytes * 4)+'-bit!')
         }
     }
  
-    print() {
+    output(): string {
         let i = this.bytes - 1;
-        // let p = this.bytes - 1;
         let output = '';
         // Write value
         for(i; i >= 0; i--) {
             if(this.blocks[i].contains > 9) {
                 output += bmap.get(this.blocks[i].contains).toString();
             } else {
-                output += +this.blocks[i].contains.toString();
+                output += this.blocks[i].contains.toString();
             }
         }
         // Pad with zeroes

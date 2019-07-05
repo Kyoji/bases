@@ -6,22 +6,71 @@ body, html, p, span {
 body, html {
     height: 100%;
 }
-
-body {
+html {
     font-size: 16px;
-    background-color: rgb(63, 77, 92);
     font-family: 'Inconsolata', sans-serif;
+}
+body {
+    background-color: rgb(63, 77, 92);
+    
     color: rgb(159, 165, 185);
 }
 
-.wrapper {
+#content {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 3rem 4rem 1fr;
+    grid-template-areas: "header" "input" "body";
+    width: 32rem;
+    height: 100%;
+    margin: 0 auto;
+}
+
+#header, #input, #base-wrapper {
     display: flex;
+}
+
+#header {
+    grid-area: header;
+    padding-top: 1rem;
+}
+
+#input {
+    grid-area: input;
+    display: grid;
+    grid-template-columns: 1fr 2rem 1fr;
+    grid-template-rows: 1fr;
+    grid-template-areas: "left gutter right"
+}
+
+#input input {
+    background-color: inherit;
+    border: none;
+    font-size: 1.5rem;
+    height: 2rem;
+    color: inherit;
+    font-family: 'Inconsolata', sans-serif;
+    border-bottom: 2px solid rgb(159, 165, 185);
+    padding-top: 3rem;
+}
+
+#input-to {
+    grid-area: right;
+}
+
+#input-from {
+    grid-area: left; 
+}
+
+#base-wrapper {
+    grid-area: body;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    width: 500px;
-    margin: 0 auto;
-    height: 100%;
+}
+
+#brand {
+    font-size: 2rem;
 }
 
 .base {
@@ -32,12 +81,16 @@ body {
 }
 
 .block {
-    width: 50px;
-    height: 50px;
-    font-size: 1.4em;
+    width: 3.2rem;
+    height: 3.2rem;
+    font-size: 1.3em;
     color: white;
     border: 2px solid rgb(86, 91, 105);
     background-color: rgb(56, 61, 75);
-    line-height: 50px;
+    line-height: 3.2rem;
     text-align: center;
+}
+
+.block.zero {
+    color: rgb(86, 91, 105);
 }
