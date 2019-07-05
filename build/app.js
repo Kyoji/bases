@@ -17,10 +17,6 @@
             let base = 16;
             this.baseTo = new base_1.default(base, this.bytes);
             this.baseFrom = new base_1.default(10, this.bytes);
-            // this.baseFrom.insert(test);
-            // this.baseTo.convert(this.baseFrom);
-            // console.log(this.baseTo.output());
-            // console.log(this.baseFrom.output());
         }
         update() {
             this.baseTo.convert(this.baseFrom);
@@ -45,18 +41,23 @@
                 }
             }
         }
+        watch(input) {
+            if (input.value !== '') {
+                app.baseFrom.insert(input.value);
+                app.update();
+            }
+            else {
+                app.baseFrom.insert('0');
+            }
+            console.log(app.baseFrom.value);
+        }
     }
     let app = new App();
     const input = document.getElementById("input-from");
+    input.value = '1234';
+    app.watch(input);
     input.addEventListener("keyup", function (e) {
-        if (input.value !== '') {
-            app.baseFrom.insert(input.value);
-            app.update();
-        }
-        else {
-            app.baseFrom.insert('0');
-        }
-        console.log(app.baseFrom.value);
+        app.watch(input);
     });
 });
 //# sourceMappingURL=app.js.map

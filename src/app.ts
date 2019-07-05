@@ -10,10 +10,6 @@ class App {
         let base = 16;
         this.baseTo = new Base(base, this.bytes);
         this.baseFrom = new Base(10, this.bytes);
-        // this.baseFrom.insert(test);
-        // this.baseTo.convert(this.baseFrom);
-        // console.log(this.baseTo.output());
-        // console.log(this.baseFrom.output());
     }
 
     update() {
@@ -40,17 +36,23 @@ class App {
             }
         }
     }
+
+    watch(input: HTMLInputElement) {
+        if(input.value !== '') {
+            app.baseFrom.insert(input.value);
+            app.update();
+        } else {
+            app.baseFrom.insert('0');
+        }
+        console.log(app.baseFrom.value);
+    }
 }
 
 let app = new App();
 
 const input = <HTMLInputElement>document.getElementById("input-from");
+input.value = '1234';
+app.watch(input);
 input.addEventListener("keyup", function(e){
-    if(input.value !== '') {
-        app.baseFrom.insert(input.value);
-        app.update();
-    } else {
-        app.baseFrom.insert('0');
-    }
-    console.log(app.baseFrom.value);
+    app.watch(input);
 });
