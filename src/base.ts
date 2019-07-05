@@ -64,7 +64,9 @@ export default class Base {
 
     print() {
         let i = this.places - 1;
+        let p = this.bytes - 1;
         let output = '';
+        // Write value
         for(i; i >= 0; i--) {
             if(this.blocks[i].contains > 9) {
                 output += bmap.get(this.blocks[i].contains);
@@ -72,7 +74,11 @@ export default class Base {
                 output += this.blocks[i].contains;
             }
         }
-        console.log(output);
+        // Pad with zeroes
+        for(p; p > i; p--) {
+            output += '0';
+        }
+        return output;
     }
 
 }

@@ -1,0 +1,37 @@
+body, html, p, span {
+    margin: 0;
+    padding: 0;
+}
+
+body, html {
+    height: 100%;
+}
+
+body {
+    font-size: 16px;
+}
+
+.wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 500px;
+    margin: 0 auto;
+    height: 100%;
+}
+
+.base {
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+    margin-bottom: 2rem;
+}
+
+.block {
+    width: 50px;
+    height: 50px;
+    border: 1px solid black;
+    line-height: 50px;
+    text-align: center;
+}

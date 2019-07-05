@@ -2,23 +2,27 @@ import Base from './base';
 
 class App {
     bytes: number = 8;
-    baseFrom: Base;
-    baseTo: Base;
+    public baseFrom: Base;
+    public baseTo: Base;
 
     constructor() {
-        let test = '87392';
+        let test = '2810';
         let base = 16;
         this.baseTo = new Base(16, this.bytes);
         this.baseFrom = new Base(10, this.bytes);
         this.baseFrom.insert(test);
         this.baseTo.convert(this.baseFrom);
-        console.log(test+' in base '+base+' is:');
-        this.baseTo.print();
     }
 }
 
 let app = new App();
 
-let boxes = document.getElementsByClassName("box");
+const baseToBoxes: HTMLCollection = document.getElementById("base-baseto").getElementsByClassName("block");
+const baseFromBoxes: HTMLCollection = document.getElementById("base-basefrom").getElementsByClassName("block");
+const baseTo: string = app.baseTo.print();
+const baseFrom: string = app.baseFrom.print();
 
-console.log(boxes);
+for(let i = 0; i < app.bytes; i++) {
+    baseToBoxes[(app.bytes - 1) - i].innerHTML = baseTo[i];
+    baseFromBoxes[(app.bytes - 1) - i].innerHTML = baseFrom[i];
+}
