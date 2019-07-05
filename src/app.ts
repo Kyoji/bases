@@ -12,6 +12,8 @@ class App {
         this.baseFrom = new Base(10, this.bytes);
         this.baseFrom.insert(test);
         this.baseTo.convert(this.baseFrom);
+        console.log(this.baseTo.print());
+        console.log(this.baseFrom.print());
     }
 }
 
@@ -23,6 +25,6 @@ const baseTo: string = app.baseTo.print();
 const baseFrom: string = app.baseFrom.print();
 
 for(let i = 0; i < app.bytes; i++) {
-    baseToBoxes[(app.bytes - 1) - i].innerHTML = baseTo[i];
-    baseFromBoxes[(app.bytes - 1) - i].innerHTML = baseFrom[i];
+    baseToBoxes[i].innerHTML = baseTo[i];
+    baseFromBoxes[i].innerHTML = baseFrom[i];
 }

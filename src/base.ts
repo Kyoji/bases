@@ -61,23 +61,23 @@ export default class Base {
             console.log('Result greater than '+(this.bytes * 4)+'-bit!')
         }
     }
-
+ 
     print() {
-        let i = this.places - 1;
-        let p = this.bytes - 1;
+        let i = this.bytes - 1;
+        // let p = this.bytes - 1;
         let output = '';
         // Write value
         for(i; i >= 0; i--) {
             if(this.blocks[i].contains > 9) {
-                output += bmap.get(this.blocks[i].contains);
+                output += bmap.get(this.blocks[i].contains).toString();
             } else {
-                output += this.blocks[i].contains;
+                output += +this.blocks[i].contains.toString();
             }
         }
         // Pad with zeroes
-        for(p; p > i; p--) {
-            output += '0';
-        }
+        // for(p; p > i; p--) {
+        //     output += '0';
+        // }
         return output;
     }
 
