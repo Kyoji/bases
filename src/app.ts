@@ -49,7 +49,7 @@ class App {
         } else {
             app.update('0');
         }
-        console.log(app.baseFrom.value);
+        // console.log(app.baseFrom.value);
     }
 }
 

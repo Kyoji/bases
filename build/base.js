@@ -46,7 +46,7 @@
                 return;
             }
             this.value = number;
-            console.log(this.value);
+            // console.log(this.value);
             let i = 0;
             let offset = this.bytes - number.length;
             for (i; i < offset; i++) {

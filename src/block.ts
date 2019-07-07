@@ -28,7 +28,7 @@ export default class Block {
             this.isNotZero(); 
         }
         this.blockElement.innerHTML = number;
-        console.log(this.blockElement);
+        // console.log(this.blockElement);
     }
 
     public isZero() {

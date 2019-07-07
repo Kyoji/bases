@@ -53,7 +53,7 @@
             else {
                 app.update('0');
             }
-            console.log(app.baseFrom.value);
+            // console.log(app.baseFrom.value);
         }
     }
     let app = new App();

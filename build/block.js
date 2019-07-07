@@ -33,7 +33,7 @@
                 this.isNotZero();
             }
             this.blockElement.innerHTML = number;
-            console.log(this.blockElement);
+            // console.log(this.blockElement);
         }
         isZero() {
             this.blockElement.classList.add('zero');
