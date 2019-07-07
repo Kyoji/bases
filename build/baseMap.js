@@ -9,7 +9,7 @@
 })(function (require, exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
-    let baseCharacterMap = new Map([
+    const baseCharacterMap = new Map([
         [0, '0'],
         [1, '1'],
         [2, '2'],

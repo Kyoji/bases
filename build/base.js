@@ -12,21 +12,30 @@
     const block_1 = require("./block");
     const baseMap_1 = require("./baseMap");
     class Base {
-        constructor(base, bytes) {
+        constructor(base, bytes, id) {
             this.blocks = [];
             this.places = 0;
             this.zeroes = this.bytes;
             this.base = base;
             this.bytes = bytes;
             this.blocksInit();
+            this.blockContainer = document.createElement('div');
+            this.blockContainer.classList.add('base');
+            this.blockContainer.id = id;
+            this.getHTML();
         }
         blocksInit() {
-            this.blocks = [];
             let i = 0;
             for (i; i < this.bytes; i++) {
                 let multiplier = Math.pow(this.base, i);
                 let block = new block_1.default(multiplier);
                 this.blocks.push(block);
+            }
+        }
+        blocksReset() {
+            let i = 0;
+            for (i; i < this.bytes; i++) {
+                this.blocks[i].update('0');
             }
         }
         insert(number) {
@@ -39,29 +48,37 @@
             this.value = number;
             console.log(this.value);
             let i = 0;
-            let offset = number.length - 1;
-            for (i; i < number.length; i++) {
-                this.blocks[i].contains = +number[offset - i];
+            let offset = this.bytes - number.length;
+            for (i; i < offset; i++) {
+                this.blocks[i].update('0');
+            }
+            for (i; i < this.bytes; i++) {
+                this.blocks[i].update(number[i - offset]);
                 this.places++;
             }
             this.zeroes = this.bytes - this.places;
         }
         reset() {
-            this.blocksInit();
+            this.blocksReset();
             this.places = 0;
+            this.zeroes = 0;
         }
         convert(baseFrom) {
             this.reset();
-            let offset = this.bytes - 1;
+            let i = this.bytes - 1;
             let decValue = +baseFrom.value;
-            for (offset; offset >= 0; offset--) {
-                while (decValue >= this.blocks[offset].multiplier) {
-                    this.blocks[offset].contains++;
-                    decValue -= this.blocks[offset].multiplier;
+            // TODO: Create reverse basemap lookup to do this properly
+            for (i; i >= 0; i--) {
+                let blockValue = this.blocks[i].contains;
+                while (decValue >= this.blocks[i].multiplier) {
+                    blockValue++;
+                    decValue -= this.blocks[i].multiplier;
                 }
-                if (this.blocks[offset].contains > 0 && this.places === 0) {
-                    this.places = offset + 1;
+                // This conditional applies only once to catch the highest place!
+                if (blockValue > 0 && this.places === 0) {
+                    this.places = i + 1;
                 }
+                this.blocks[(this.bytes - 1) - i].update(baseMap_1.default.get(blockValue));
             }
             this.zeroes = this.bytes - this.places;
             if (this.blocks[this.places - 1].contains > this.base) {
@@ -74,17 +91,29 @@
             // Write value
             for (i; i >= 0; i--) {
                 if (this.blocks[i].contains > 9) {
-                    output += baseMap_1.default.get(this.blocks[i].contains).toString();
+                    output += baseMap_1.default.get(this.blocks[i].contains);
                 }
                 else {
                     output += this.blocks[i].contains.toString();
                 }
             }
-            // Pad with zeroes
-            // for(p; p > i; p--) {
-            //     output += '0';
-            // }
             return output;
+        }
+        getHTML() {
+            for (let i = 0; i < this.bytes; i++) {
+                this.blockContainer.append(this.blocks[i].blockContainer);
+            }
+            return this.blockContainer;
+        }
+        updateBlocksHTML() {
+            let i = 0;
+            for (i; i < this.bytes; i++) {
+                this.blocks[i].isNotZero();
+                if (i < this.zeroes) {
+                    this.blocks[i].isZero();
+                }
+                this.blocks[i].update(this.value[i]);
+            }
         }
     }
     exports.default = Base;
