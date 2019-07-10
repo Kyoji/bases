@@ -1,5 +1,6 @@
 import Block from './block';
-import bmap from './baseMap';
+import baseCharacterMap from './baseCharacterMap';
+import baseStringMap from './baseStringMap';
 import stringToArray from './stringToArray';
 
 export default class Base {
@@ -15,10 +16,7 @@ export default class Base {
         this.base = base;
         this.bytes = bytes;
         this.blocksInit();
-        this.blockContainer = document.createElement('div') as HTMLDivElement;
-        this.blockContainer.classList.add('base');
-        this.blockContainer.id = id;
-        this.getHTML();
+        this.createHTML(id);
     }
 
     blocksInit() {
@@ -33,26 +31,27 @@ export default class Base {
     blocksReset() {
         let i =0;
         for(i; i < this.bytes; i++) {
-            this.blocks[i].update('0');
+            let multiplier = Math.pow(this.base, i);
+            this.blocks[i].multiplier = multiplier;
+            this.blocks[i].update('0', true);
         }
     }
 
     insert(number: string) {
-        this.places = 0;
-        this.zeroes = 0;
         if( number.length > this.bytes) {
             alert("Number too long!");
             return;
         }
+        this.places = 0;
+        this.zeroes = 0;
         this.value = number;
-        // console.log(this.value);
         let i = 0
         let offset = this.bytes - number.length;
         for(i; i < offset; i++) {
-            this.blocks[i].update('0');
+            this.blocks[i].update('0', true);
         }
         for(i; i < this.bytes; i++) {
-            this.blocks[i].update(number[i - offset]);
+            this.blocks[i].update(number[i - offset], false);
             this.places++;
         }
         this.zeroes = this.bytes - this.places;
@@ -66,55 +65,41 @@ export default class Base {
 
     convert(baseFrom: Base) {
         this.reset();
-        let i = this.bytes - 1;
         let decValue = +baseFrom.value;
-        // TODO: Create reverse basemap lookup to do this properly
+        let convertedString = '';
+        let sigFig: boolean = false;
+        let i = this.bytes - 1;
         for(i; i >= 0; i--) {
-            let blockValue = this.blocks[i].contains;
+            let blockValue = 0;
             while (decValue >= this.blocks[i].multiplier) {
                 blockValue++;
                 decValue -= this.blocks[i].multiplier;
             }
-            // This conditional applies only once to catch the highest place!
-            if(  blockValue > 0 && this.places === 0 ) {
-                this.places = i + 1;
+            switch (blockValue) {
+                case 0:
+                    if(sigFig)
+                    convertedString += baseCharacterMap.get(blockValue);
+                    break;
+                default:
+                    convertedString += baseCharacterMap.get(blockValue);
+                    sigFig = true;
+                    break;
             }
-            this.blocks[(this.bytes - 1) - i].update(bmap.get(blockValue));
         }
-        this.zeroes = this.bytes - this.places;
+        this.insert(convertedString);
         if( this.blocks[this.places - 1].contains > this.base ) {
             console.log('Result greater than '+(this.bytes * 4)+'-bit!')
         }
     }
- 
-    output(): string {
-        let i = this.bytes - 1;
-        let output = '';
-        // Write value
-        for(i; i >= 0; i--) {
-            if(this.blocks[i].contains > 9) {
-                output += bmap.get(this.blocks[i].contains);
-            } else {
-                output += this.blocks[i].contains.toString();
-            }
-        }
-        return output;
-    }
 
-    getHTML(): HTMLDivElement {
+    createHTML(id: string): HTMLDivElement {
+        this.blockContainer = document.createElement('div') as HTMLDivElement;
+        this.blockContainer.classList.add('base');
+        this.blockContainer.id = id;
         for(let i = 0; i < this.bytes; i++) {
             this.blockContainer.append(this.blocks[i].blockContainer);
         }
         return this.blockContainer;
-    }
-
-    public updateBlocksHTML() {
-        let i = 0;
-        for(i; i < this.bytes; i++) {
-            this.blocks[i].isNotZero()
-            if(i < this.zeroes) { this.blocks[i].isZero() }
-            this.blocks[i].update(this.value[i]);
-        }
     }
 
 }

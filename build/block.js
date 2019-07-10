@@ -24,22 +24,22 @@
             this.blockElement.innerHTML = '0';
             this.blockContainer.append(this.blockElement);
         }
-        update(number) {
+        update(number, isZero) {
             this.contains = +number;
-            if (number === '0') {
-                this.isZero();
-            }
-            else {
-                this.isNotZero();
-            }
+            this.addZero(isZero);
             this.blockElement.innerHTML = number;
-            // console.log(this.blockElement);
         }
-        isZero() {
-            this.blockElement.classList.add('zero');
-        }
-        isNotZero() {
-            this.blockElement.classList.remove('zero');
+        addZero(isZero) {
+            switch (isZero) {
+                case true:
+                    this.blockElement.classList.add('zero');
+                    break;
+                case false:
+                    this.blockElement.classList.remove('zero');
+                    break;
+                default:
+                    break;
+            }
         }
     }
     exports.default = Block;

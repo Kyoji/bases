@@ -58,7 +58,7 @@ body {
     outline: none;
 }
 
-#input-to {
+#input-base {
     grid-area: right;
 }
 

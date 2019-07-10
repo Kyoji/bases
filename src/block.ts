@@ -20,23 +20,24 @@ export default class Block {
         this.blockContainer.append(this.blockElement);
     }
 
-    public update(number: string) {
+    public update(number: string, isZero: boolean) {
         this.contains = +number;
-        if(number === '0'){ 
-            this.isZero(); 
-        } else { 
-            this.isNotZero(); 
-        }
+        this.addZero(isZero);
         this.blockElement.innerHTML = number;
-        // console.log(this.blockElement);
     }
 
-    public isZero() {
-        this.blockElement.classList.add('zero');
-    }
-
-    public isNotZero() {
-        this.blockElement.classList.remove('zero');
+    public addZero(isZero: boolean) {
+        switch (isZero) {
+            case true:
+                this.blockElement.classList.add('zero');
+                break;
+            case false:
+                this.blockElement.classList.remove('zero');
+                break;
+            default:
+                break;
+        }
+        
     }
 
 }
