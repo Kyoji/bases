@@ -19,7 +19,7 @@ body {
 #content {
     display: grid;
     grid-template-columns: 1fr;
-    grid-template-rows: 3rem 4rem 1fr;
+    grid-template-rows: 3rem 6rem 1fr;
     grid-template-areas: "header" "input" "body";
     width: 32rem;
     height: 100%;
