@@ -39,7 +39,7 @@ export default class Base {
 
     insert(number: string) {
         if( number.length > this.bytes) {
-            alert("Number too long!");
+            console.log("Number too long!");
             return;
         }
         this.places = 0;
@@ -87,6 +87,7 @@ export default class Base {
             }
         }
         this.insert(convertedString);
+        console.log(this.places - 1);
         if( this.blocks[this.places - 1].contains > this.base ) {
             console.log('Result greater than '+(this.bytes * 4)+'-bit!')
         }

@@ -40,7 +40,7 @@ class App {
             case '0':
             case '1':
             case '':
-                this.update('0', '10');
+                // this.update('0', '10');
                 return
                 break;
             default:
