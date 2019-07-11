@@ -80,8 +80,30 @@ body {
 .base {
     display: flex;
     justify-content: space-around;
+    align-items: flex-end;
     width: 100%;
     margin-bottom: 2rem;
+}
+
+.block-container {
+    display: flex;
+    flex-direction: column;
+    width: 3.2rem;
+}
+
+.bit-container {
+    display: flex;
+    flex-direction: row;
+    /* justify-content: space-around; */
+    flex-flow: row wrap;
+    margin: 0.533rem 0 0.533rem 0.533rem;
+}
+
+.bit {
+    height: 0.8rem;
+    width: 0.8rem;
+    margin: 0 0.533rem 0.533rem 0;
+    background-color: white;
 }
 
 .block {
