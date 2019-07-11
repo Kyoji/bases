@@ -50,8 +50,8 @@
     }
     const inputFrom = document.getElementById("input-from");
     const inputBase = document.getElementById("input-base");
-    inputFrom.value = '100000';
-    inputBase.value = '27';
+    inputFrom.value = '3125205';
+    inputBase.value = '25';
     let app = new App(inputFrom, inputBase);
     const test = document.getElementById('base-wrapper');
     test.appendChild(app.baseTo.blockContainer);

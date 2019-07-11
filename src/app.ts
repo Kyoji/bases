@@ -54,8 +54,8 @@ class App {
 
 const inputFrom = document.getElementById("input-from") as HTMLInputElement;
 const inputBase = document.getElementById("input-base") as HTMLInputElement;
-inputFrom.value = '100000';
-inputBase.value = '27';
+inputFrom.value = '3125205';
+inputBase.value = '25';
 
 let app = new App(inputFrom, inputBase);
 
