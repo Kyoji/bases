@@ -6,13 +6,14 @@ body, html, p, span {
 body, html {
     height: 100%;
 }
+
 html {
     font-size: 16px;
     font-family: 'Inconsolata', sans-serif;
 }
+
 body {
     background-color: rgb(63, 77, 92);
-    
     color: rgb(159, 165, 185);
 }
 
@@ -88,21 +89,28 @@ body {
 .block-container {
     display: flex;
     flex-direction: column;
-    width: 3.2rem;
+    align-items: center;
+    width: 3.4rem;
 }
 
 .bit-container {
     display: flex;
-    flex-direction: row;
-    /* justify-content: space-around; */
+    margin-bottom: 0.5rem;
+    width: 40px;
+    height: 63px;
     flex-flow: row wrap;
-    margin: 0.533rem 0 0.533rem 0.533rem;
+    justify-content: flex-end;
+    align-content: flex-end;
+    padding: 0 0.2rem;
+    /* margin: 0.533rem 0 0.533rem 0.533rem; */
 }
 
 .bit {
-    height: 0.8rem;
-    width: 0.8rem;
-    margin: 0 0.533rem 0.533rem 0;
+    height: 4px;
+    width: 4px;
+    margin: 3px;
+    border-radius: 2px;
+    /* margin: 0 0.533rem 0.533rem 0; */
     background-color: white;
 }
 
