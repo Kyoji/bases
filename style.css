@@ -99,10 +99,14 @@ body {
     width: 40px;
     height: 63px;
     flex-flow: row wrap;
-    justify-content: s;
+    justify-content: flex-end;
     align-content: flex-end;
     padding: 0 0.2rem;
     /* margin: 0.533rem 0 0.533rem 0.533rem; */
+}
+
+.bit-container.center {
+    justify-content: center;
 }
 
 .bit {

@@ -64,6 +64,7 @@
             }
         }
         syncBits() {
+            this.bitContainer.classList.remove('center');
             this.bits.forEach((elem, i) => {
                 this.bitContainer.removeChild(elem);
             });
@@ -73,6 +74,9 @@
                 this.bits[i] = document.createElement('div');
                 this.bits[i].classList.add('bit');
                 this.bitContainer.append(this.bits[i]);
+            }
+            if (this.contains <= 4) {
+                this.bitContainer.classList.add('center');
             }
         }
     }
