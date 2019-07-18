@@ -7,10 +7,17 @@ export default class Block {
     private blockElement: HTMLDivElement;
     private bitContainer: HTMLDivElement;
     private bits: HTMLDivElement[] = [];
+    private valueContainer: HTMLDivElement;
+    private baseLabel: HTMLDivElement;
+    private powerLabel: HTMLDivElement;
+    private base: string = '10';
+    private power: string = '0';
 
-    constructor(multiplier: number) {
+    constructor(multiplier: number, base: number, power: number) {
         this.multiplier = multiplier;
         this.contains = 0;
+        this.base = base.toString();
+        this.power = power.toString();
         this.createHTML();
     }
 
@@ -19,21 +26,27 @@ export default class Block {
         this.bitContainer = document.createElement('div') as HTMLDivElement;
         this.bitContainer.classList.add('bit-container');
         this.blockElement =  document.createElement('div') as HTMLDivElement;
+        this.valueContainer = document.createElement('div') as HTMLDivElement;
+        this.valueContainer.classList.add('value-label');
+        this.baseLabel = document.createElement('div') as HTMLDivElement;
+        this.powerLabel = document.createElement('div') as HTMLDivElement;
+        this.baseLabel.classList.add('base-label');
+        this.powerLabel.classList.add('power-label');
+        this.baseLabel.innerHTML = this.base;
+        this.powerLabel.innerHTML = this.power;
         this.blockContainer.classList.add('block-container');
         this.blockElement.classList.add('block');
         this.blockElement.classList.add('zero');
         this.blockElement.innerHTML = '0';
         this.blockContainer.append(this.bitContainer);
         this.blockContainer.append(this.blockElement);
-        // this.bits[0] = document.createElement('div') as HTMLDivElement;
-        // this.bits[1] = document.createElement('div') as HTMLDivElement;
-        // this.bits[0].classList.add('bit');
-        // this.bits[1].classList.add('bit');
-        // this.bitContainer.append(this.bits[0]);
-        // this.bitContainer.append(this.bits[1]);
+        this.valueContainer.append(this.baseLabel, this.powerLabel);
+        this.blockContainer.append(this.valueContainer);
     }
 
-    public update(number: string, isZero: boolean) {
+    public update(number: string, isZero: boolean, base: number) {
+        this.base = base.toString();
+        this.baseLabel.innerHTML = this.base;
         this.contains = baseStringMap.get(number);
         this.addZero(isZero);
         this.blockElement.innerHTML = number;

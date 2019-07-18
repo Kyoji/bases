@@ -16,14 +16,14 @@ export default class Base {
         this.base = base;
         this.bytes = bytes;
         this.blocksInit();
-        this.createHTML(id);
+        this.generateHTML(id);
     }
 
     blocksInit() {
         let i = 0;
         for(i; i < this.bytes; i++) {
             let multiplier = Math.pow(this.base, i);
-            let block = new Block(multiplier);
+            let block = new Block(multiplier, this.base, (this.bytes - 1) - i);
             this.blocks.push(block);
         }
     }
@@ -33,7 +33,7 @@ export default class Base {
         for(i; i < this.bytes; i++) {
             let multiplier = Math.pow(this.base, i);
             this.blocks[i].multiplier = multiplier;
-            this.blocks[i].update('0', true);
+            this.blocks[i].update('0', true, this.base);
         }
     }
 
@@ -48,10 +48,10 @@ export default class Base {
         let i = 0
         let offset = this.bytes - number.length;
         for(i; i < offset; i++) {
-            this.blocks[i].update('0', true);
+            this.blocks[i].update('0', true, this.base);
         }
         for(i; i < this.bytes; i++) {
-            this.blocks[i].update(number[i - offset], false);
+            this.blocks[i].update(number[i - offset], false, this.base);
             this.places++;
         }
         this.zeroes = this.bytes - this.places;
@@ -93,7 +93,7 @@ export default class Base {
         }
     }
 
-    createHTML(id: string): HTMLDivElement {
+    generateHTML(id: string): HTMLDivElement {
         this.blockContainer = document.createElement('div') as HTMLDivElement;
         this.blockContainer.classList.add('base');
         this.blockContainer.id = id;

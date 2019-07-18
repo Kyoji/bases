@@ -19,13 +19,13 @@
             this.base = base;
             this.bytes = bytes;
             this.blocksInit();
-            this.createHTML(id);
+            this.generateHTML(id);
         }
         blocksInit() {
             let i = 0;
             for (i; i < this.bytes; i++) {
                 let multiplier = Math.pow(this.base, i);
-                let block = new block_1.default(multiplier);
+                let block = new block_1.default(multiplier, this.base, (this.bytes - 1) - i);
                 this.blocks.push(block);
             }
         }
@@ -34,7 +34,7 @@
             for (i; i < this.bytes; i++) {
                 let multiplier = Math.pow(this.base, i);
                 this.blocks[i].multiplier = multiplier;
-                this.blocks[i].update('0', true);
+                this.blocks[i].update('0', true, this.base);
             }
         }
         insert(number) {
@@ -48,10 +48,10 @@
             let i = 0;
             let offset = this.bytes - number.length;
             for (i; i < offset; i++) {
-                this.blocks[i].update('0', true);
+                this.blocks[i].update('0', true, this.base);
             }
             for (i; i < this.bytes; i++) {
-                this.blocks[i].update(number[i - offset], false);
+                this.blocks[i].update(number[i - offset], false, this.base);
                 this.places++;
             }
             this.zeroes = this.bytes - this.places;
@@ -90,7 +90,7 @@
                 console.log('Result greater than ' + (this.bytes * 4) + '-bit!');
             }
         }
-        createHTML(id) {
+        generateHTML(id) {
             this.blockContainer = document.createElement('div');
             this.blockContainer.classList.add('base');
             this.blockContainer.id = id;

@@ -13,7 +13,7 @@
     class App {
         constructor(inputFrom, inputBase) {
             this.bytes = 8;
-            this.baseTo = new base_1.default(+this.inputBase, this.bytes, 'baseto');
+            this.baseTo = new base_1.default(+inputBase.value, this.bytes, 'baseto');
             this.baseFrom = new base_1.default(10, this.bytes, 'basefrom');
             this.inputFrom = inputFrom;
             this.inputBase = inputBase;
@@ -50,8 +50,8 @@
     }
     const inputFrom = document.getElementById("input-from");
     const inputBase = document.getElementById("input-base");
-    inputFrom.value = '3125205';
-    inputBase.value = '25';
+    inputFrom.value = '315';
+    inputBase.value = '27';
     let app = new App(inputFrom, inputBase);
     const test = document.getElementById('base-wrapper');
     test.appendChild(app.baseTo.blockContainer);

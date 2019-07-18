@@ -11,7 +11,7 @@ class App {
         inputFrom: HTMLInputElement,
         inputBase: HTMLInputElement 
         ) {
-        this.baseTo = new Base(+this.inputBase, this.bytes, 'baseto');
+        this.baseTo = new Base(+inputBase.value, this.bytes, 'baseto');
         this.baseFrom = new Base(10, this.bytes, 'basefrom');
         this.inputFrom = inputFrom;
         this.inputBase = inputBase;
@@ -54,8 +54,8 @@ class App {
 
 const inputFrom = document.getElementById("input-from") as HTMLInputElement;
 const inputBase = document.getElementById("input-base") as HTMLInputElement;
-inputFrom.value = '3125205';
-inputBase.value = '25';
+inputFrom.value = '315';
+inputBase.value = '27';
 
 let app = new App(inputFrom, inputBase);
 
