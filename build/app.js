@@ -50,8 +50,17 @@
     }
     const inputFrom = document.getElementById("input-from");
     const inputBase = document.getElementById("input-base");
+    const url = new URL(window.location.href);
+    const ptb = url.searchParams.get('base');
+    const pn = url.searchParams.get('num');
     inputFrom.value = '315';
     inputBase.value = '27';
+    if (ptb) {
+        inputBase.value = ptb;
+    }
+    if (pn) {
+        inputFrom.value = pn;
+    }
     let app = new App(inputFrom, inputBase);
     const test = document.getElementById('base-wrapper');
     test.appendChild(app.baseTo.blockContainer);

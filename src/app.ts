@@ -54,8 +54,18 @@ class App {
 
 const inputFrom = document.getElementById("input-from") as HTMLInputElement;
 const inputBase = document.getElementById("input-base") as HTMLInputElement;
+const url = new URL(window.location.href);
+const ptb = url.searchParams.get('base');
+const pn = url.searchParams.get('num');
 inputFrom.value = '315';
 inputBase.value = '27';
+if(ptb) {
+    inputBase.value = ptb;
+}
+if(pn) {
+    inputFrom.value = pn;
+}
+
 
 let app = new App(inputFrom, inputBase);
 
